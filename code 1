@@ -1,0 +1,36 @@
+import random
+
+words = ["python", "code", "play", "game", "learn"]
+secret_word = random.choice(words)
+
+display = "_ " * len(secret_word)
+print("secret word : ", display)
+
+attempts_left = 6
+guessed_letters = []
+
+while attempts_left > 0:
+    display = ""
+    for letter in secret_word:
+        if letter in guessed_letters:
+            display += letter + " "
+        else:
+            display += "_ "
+            
+    print("current word = ", display.strip())
+    
+    if "_" not in display:
+        print("Congratulation you are win the game")
+        break
+        
+    guess = input("Guess a letter : ").lower()
+    
+    if guess in secret_word:
+        if guess not in guessed_letters:
+            guessed_letters.append(guess)
+            print("Good guess!")
+        else:
+            print("You already guessed that letter.")
+    else:
+        attempts_left -= 1
+        print(f"Wrong guess! Attempts left: {attempts_left}")
